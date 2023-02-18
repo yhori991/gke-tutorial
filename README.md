@@ -1,7 +1,7 @@
 # gke-tutarial
 This is a Tutorial of Google Kubernetes Engine
 
-1. [Create GKE Cluster](https://github.com/khosino/gke-tutarial/edit/master/README.md#create-gke-cluster)
+1. [Create GKE Cluster](https://github.com/khosino/gke-tutarial#create-gke-cluster)
 2. Deploy sample python web application on kubernetes
 3. 
 
