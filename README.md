@@ -13,7 +13,8 @@ GKE (Google Kubernetes Engine)is the most scalable and fully automated Kubernete
 
 [What's Kubernetes?](https://cloud.google.com/learn/what-is-kubernetes)
 
+With the widespread adoption of containers among organizations, Kubernetes, the container-centric management software, has become the de facto standard to deploy and operate containerized applications.
 
-```bash
-pip install foobar
+```
+
 ```
