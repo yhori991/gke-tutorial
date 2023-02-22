@@ -7,13 +7,13 @@ This is a Tutorial of Google Kubernetes Engine
 
 ## Create GKE Cluster
 
-[What's GKE?](https://cloud.google.com/kubernetes-engine?hl=en)
-
-GKE (Google Kubernetes Engine)is the most scalable and fully automated Kubernetes service
-
 [What's Kubernetes?](https://cloud.google.com/learn/what-is-kubernetes)
 
 With the widespread adoption of containers among organizations, Kubernetes, the container-centric management software, has become the de facto standard to deploy and operate containerized applications.
+
+[What's GKE?](https://cloud.google.com/kubernetes-engine?hl=en)
+
+GKE (Google Kubernetes Engine)is the most scalable and fully automated Kubernetes service
 
 ```
 
