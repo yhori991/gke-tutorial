@@ -141,7 +141,7 @@ kubectl  get  pods
 kubectl  get  pods  -n  {namespace(e.g. default, kube-system)} 
 kubectl  get  pods   -o  wide
 
-# Kubernetes の マニフェスト を適用
+# Apply the manifest of kubernetes 
 kubectl  apply  -f  {YAML file path}
 kubectl  apply  -f  {directly path including YAML}
 ```
