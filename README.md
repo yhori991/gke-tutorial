@@ -127,8 +127,30 @@ Select the CONNECT on the console and change the project info to yours.
 $ gcloud container clusters get-credentials autopilot-cluster-1 --region asia-northeast1 --project gke-tutorial-hclsj
 ```
 
+Check 'kubectl'
+
+```
+## Command Cheet Sheet
+
+# Node check
+$ kubectl  get  nodes
 
 
+# Pod check
+kubectl  get  pods
+kubectl  get  pods  -n  {namespace(e.g. default, kube-system)} 
+kubectl  get  pods   -o  wide
+
+# Kubernetes の マニフェスト を適用
+kubectl  apply  -f  {YAML file path}
+kubectl  apply  -f  {directly path including YAML}
+```
+
+```
+$ kubectl get nodes
+$ kubectl get pods
+$ kubectl get pods -n kube-system
+```
 
 
 
