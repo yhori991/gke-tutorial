@@ -2,7 +2,7 @@
 This is a Tutorial of Google Kubernetes Engine
 
 1. [Create GKE Cluster & other GCP resources](https://github.com/khosino/gke-tutarial#create-gke-cluster)
-2. Deploy sample python web application on kubernetes
+2. Deploy sample web application on GKE
 3. 
 
 ## Create GKE Cluster and other GCP resources
@@ -39,8 +39,97 @@ GKE Cluster is created.
 Click `Create`
 
 Repogitry is created
+
 <img width="562" alt="image" src="https://user-images.githubusercontent.com/111631457/222076746-d00ea348-2453-4dc4-8282-336bf51450fc.png">
 
 ## Deploy sample python web application on kubernetes
+
 In Cloud Shell
+
+Clone this github repo
+
+```
+$ git clone https://github.com/khosino/gke-tutarial.git
+$ cd gke-tutorial
+$ ls -l
+```
+
+### Build and push the docker image
+
+Please check the Dockerfile and index.html! (Cloud Shell Editor is recommended)
+
+<img width="1414" alt="image" src="https://user-images.githubusercontent.com/111631457/222078397-7e5082ca-3f83-4222-b0b6-8afb68b4e3a7.png">
+
+#### Build the Dockerfile
+
+--tag option means naming the image.
+
+```
+$ cd docker
+$ docker build . --tag test-web-image
+```
+
+<img width="786" alt="image" src="https://user-images.githubusercontent.com/111631457/222078834-310c280d-3349-4599-a70b-2de5157fcb21.png">
+
+Check the result image.
+
+```
+$ docker images
+
+REPOSITORY       TAG       IMAGE ID       CREATED          SIZE
+test-web-image   latest    2298801489d6   42 seconds ago   435MB
+```
+
+#### Push to docker repogitry created in GCP
+
+[This is the Doc how to push the image to Artifact Registry](https://cloud.google.com/artifact-registry/docs/docker/pushing-and-pulling?hl=ja)
+
+Need to set the tag like below. You can copy from Artifact Registry console in Google Cloud.
+
+_{LOCATION}-docker.pkg.dev/{PROJECT-ID}/{REPOSITORY_NAME}/{IMAGE_NAME}:{VERSION_TAG}_
+
+
+**Change the image tag to push**
+
+```
+$ docker tag test-web-image:latest asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:latest
+$ docker images
+
+REPOSITORY                                                                           TAG       IMAGE ID       CREATED         SIZE
+asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image   latest    2298801489d6   6 minutes ago   435MB
+test-web-image                                                                       latest    2298801489d6   6 minutes ago   435MB
+```
+
+**Execute the push command**
+
+```
+$ docker push asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image
+```
+
+<img width="1238" alt="image" src="https://user-images.githubusercontent.com/111631457/222081450-fc9626a9-c5f0-4d0a-be4f-c7bb9e88f824.png">
+
+**Check the result. It's pushed to Artifact Registry**
+
+<img width="1021" alt="image" src="https://user-images.githubusercontent.com/111631457/222081723-29afdd15-1b21-4689-b0aa-885bbc92d441.png">
+
+### Deploy the docker image on GKE
+
+#### Connect to GKE from Cloud Shell
+
+Select the CONNECT on the console and change the project info to yours.
+
+<img width="757" alt="image" src="https://user-images.githubusercontent.com/111631457/222082678-af53214a-4fc4-4c16-b830-5cd7777d2361.png">
+
+<img width="1015" alt="image" src="https://user-images.githubusercontent.com/111631457/222082781-3c8b3a66-7000-4083-a67c-b8652d5d954e.png">
+
+
+```
+$ gcloud container clusters get-credentials autopilot-cluster-1 --region asia-northeast1 --project gke-tutorial-hclsj
+```
+
+
+
+
+
+
 
