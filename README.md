@@ -208,5 +208,9 @@ The LoadBalancer is created automatically in Google Cloud.
 <img width="1311" alt="image" src="https://user-images.githubusercontent.com/111631457/222210376-d0fb33e9-7031-434a-b2e8-0693dd64b425.png">
 
 
+#### Pod AutoScaler
+
+#### CI/CD
+
 
 
