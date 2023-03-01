@@ -152,6 +152,20 @@ $ kubectl get pods
 $ kubectl get pods -n kube-system
 ```
 
+#### Deploy Pod
+
+Check the kubenetes manifest file in Pod directory and change the image path.
+
+<img width="1254" alt="image" src="https://user-images.githubusercontent.com/111631457/222085805-5c500abf-6083-4a79-9871-0a7bbe97e5a6.png">
+
+```
+$ cd manifest
+$ kubectl apply -f pod.yaml
+```
+Compute Default SAの権限を変える
+
+
+
 
 
 
