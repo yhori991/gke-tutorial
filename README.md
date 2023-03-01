@@ -152,7 +152,7 @@ $ kubectl get pods
 $ kubectl get pods -n kube-system
 ```
 
-#### Deploy Pod
+#### Deploy the "Pod"
 
 Check the kubenetes manifest file in Pod directory and change the image path.
 
@@ -161,10 +161,51 @@ Check the kubenetes manifest file in Pod directory and change the image path.
 ```
 $ cd manifest
 $ kubectl apply -f pod.yaml
+$ kubectl get pods
+NAME       READY   STATUS    RESTARTS   AGE
+test-web   1/1     Running   0          2m52s
 ```
-Compute Default SAの権限を変える
 
+The pod is created. To check the detail log, use describe command.
+However we cannot access to this pod because there is no service or ingress.
 
+```
+kubectl describe pods test-web
+```
+
+#### Deploy the "Deployment" and "Service"
+
+**Deploy the Deployment with 3 replicas.**
+
+```
+$ kubectl apply -f deployment.yaml
+$ kubectl get deployment
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+test-web-deployment   3/3     3            3           2m47s
+
+$ kubectl get pods
+NAME                                  READY   STATUS    RESTARTS   AGE
+test-web-deployment-d7779f6f4-crvvh   1/1     Running   0          3m19s
+test-web-deployment-d7779f6f4-mwnxs   1/1     Running   0          2m18s
+test-web-deployment-d7779f6f4-vwwsd   1/1     Running   0          3m19s
+```
+
+**Deploy the Service**
+```
+$ kubectl apply -f service.yaml
+$ kubectl get service
+NAME         TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)        AGE
+kubernetes   ClusterIP      10.118.128.1     <none>         443/TCP        7d8h
+test-web     LoadBalancer   10.118.130.151   34.85.xxx.xxx   80:30738/TCP   29m
+```
+
+Access to LoadBalancer EXTERNAL-IP (34.85.xxx.xxx)
+
+<img width="323" alt="image" src="https://user-images.githubusercontent.com/111631457/222209955-e4dd8444-233a-402c-ba7b-be220de5d667.png">
+
+The LoadBalancer is created automatically in Google Cloud.
+
+<img width="1311" alt="image" src="https://user-images.githubusercontent.com/111631457/222210376-d0fb33e9-7031-434a-b2e8-0693dd64b425.png">
 
 
 
