@@ -18,7 +18,9 @@ GKE (Google Kubernetes Engine)is the most scalable and fully automated Kubernete
 ### Create VPC
 <img width="1238" alt="image" src="https://user-images.githubusercontent.com/111631457/220551439-99f9fb4e-0e62-4621-ae8f-b7d3182cb647.png">
 <img width="846" alt="image" src="https://user-images.githubusercontent.com/111631457/220551872-3ac1620d-195a-4fcd-80e0-422e446d640d.png">
-Click `Create`
+Click Create
+
+VPC Network is created.
 
 ### Create GKE Cluster
 <img width="956" alt="image" src="https://user-images.githubusercontent.com/111631457/220567036-0d471367-116a-4bdf-b8f3-9f1c9f2ac776.png">
@@ -28,6 +30,10 @@ Click `Create`
 <img width="961" alt="image" src="https://user-images.githubusercontent.com/111631457/220567876-d0d71208-3e38-4093-bc8c-42bd4fd47a18.png">
 Click `Create`
 
-```
+GKE Cluster is created.
 
-```
+## Create Artifact Registry (Docker Registry)
+
+<img width="1427" alt="image" src="https://user-images.githubusercontent.com/111631457/222051142-1033f513-dc16-4a7c-be92-20f6c226970b.png">
+<img width="853" alt="image" src="https://user-images.githubusercontent.com/111631457/222051237-5bb8b711-eac1-4e34-9abc-9bb9b594aaaf.png">
+Click `Create`
