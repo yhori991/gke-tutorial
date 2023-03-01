@@ -1,11 +1,11 @@
-# gke-tutarial
+# GKE Tutorial
 This is a Tutorial of Google Kubernetes Engine
 
-1. [Create GKE Cluster](https://github.com/khosino/gke-tutarial#create-gke-cluster)
+1. [Create GKE Cluster & other GCP resources](https://github.com/khosino/gke-tutarial#create-gke-cluster)
 2. Deploy sample python web application on kubernetes
 3. 
 
-## Create GKE Cluster
+## Create GKE Cluster and other GCP resources
 
 [What's Kubernetes?](https://cloud.google.com/learn/what-is-kubernetes)
 
@@ -32,8 +32,15 @@ Click `Create`
 
 GKE Cluster is created.
 
-## Create Artifact Registry (Docker Registry)
+### Create Artifact Registry (Docker Registry)
 
 <img width="1427" alt="image" src="https://user-images.githubusercontent.com/111631457/222051142-1033f513-dc16-4a7c-be92-20f6c226970b.png">
 <img width="853" alt="image" src="https://user-images.githubusercontent.com/111631457/222051237-5bb8b711-eac1-4e34-9abc-9bb9b594aaaf.png">
 Click `Create`
+
+Repogitry is created
+<img width="562" alt="image" src="https://user-images.githubusercontent.com/111631457/222076746-d00ea348-2453-4dc4-8282-336bf51450fc.png">
+
+## Deploy sample python web application on kubernetes
+In Cloud Shell
+
