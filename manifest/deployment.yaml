@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-web-deployment
+  labels:
+    app: test-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test-web
+  template:
+    metadata:
+      labels:
+        app: test-web
+    spec:
+      containers:
+      - name: test-web
+        image: asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:latest
+        ports:
+        - containerPort: 80

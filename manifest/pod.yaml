@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-web
+  labels:
+    app: test-web
+spec:
+  containers:
+  - name: test-web
+    image: asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:latest
+    ports:
+    - containerPort: 80
