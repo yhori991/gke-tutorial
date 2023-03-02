@@ -498,9 +498,9 @@ When you request Spot Pods on a preferred basis, GKE schedules your Pods based o
 3. New nodes that can run Spot Pods, if the compute resources are available.
 4. New standard nodes.
 
-Deploy the best-effort basis Spot Pods
+Deploy the best-effort basis Spot Pods with GPU
 
-Open the comment "Best-effort Spot Pods"
+Open the comment "Best-effort Spot Pods" in development.yaml
 
 <details>
 <summary>Manifest "development.yaml"</summary>
@@ -567,6 +567,15 @@ spec:
   
 </details>
 
+```
+$ kubectl apply -f deployment.yaml
+$ kubectl get pods
+$ kubectl describe pods 
+~~~
+Tolerations: cloud.google.com/gke-accelerator=nvidia-tesla-t4:NoSchedule
+             cloud.google.com/gke-spot=true:NoSchedule
+~~~
+```
 
 #### Pod AutoScaler
 
