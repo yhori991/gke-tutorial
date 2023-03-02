@@ -613,5 +613,10 @@ $ yes > dev/null &
 
 #### CI/CD
 
+Continuous integration and continuous delivery (CI/CD) are essential processes to deliver software quickly and reliably. CI/CD helps to automate the build, test, and deployment process, which can save time and reduce errors.
+
+In your case, for example, you can simply write the source code for the chi chi learning to be used in Ray Cluster and upload it to git, which will automatically "build the container", "push to Docker Registory", "deploy to GKE", etc.
+In other words, you can do everything in this tutorial automatically.
+
 
 
