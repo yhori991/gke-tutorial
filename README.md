@@ -264,6 +264,8 @@ The LoadBalancer is created automatically in Google Cloud.
 
 <img width="512" alt="image" src="https://user-images.githubusercontent.com/111631457/222210376-d0fb33e9-7031-434a-b2e8-0693dd64b425.png">
 
+---
+
 #### Reaource request
 
 In Autopilot, you request resources in your Pod specification. 
@@ -273,7 +275,7 @@ If you do not specify resource requests for some containers in a Pod, Autopilot 
 
 ##### CPU and Memory request
 
-**Get current spec**
+check the current resources
 
 [Resource requests in Autopilot](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-resource-requests)
 
@@ -295,8 +297,72 @@ Requests:
 ```
 
 Change the manifest file
+Open the comment "Resrouce Request CPU" in deployment.yaml
 
-Open the "Resrouce Request CPU" in deployment.yaml
+<details>
+<summary>Manifest "development.yaml"</summary>
+  
+```  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-web-deployment
+  labels:
+    app: test-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test-web
+  template:
+    metadata:
+      labels:
+        app: test-web
+    spec:
+
+      # ### Resource Request GPU
+      # nodeSelector:
+      #   cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
+      # ###
+
+      # ### Best-effort Spot Pod
+      # terminationGracePeriodSeconds: 25
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: cloud.google.com/gke-spot
+      #           operator: In
+      #           values:
+      #           - "true"
+      # ###
+      
+      containers:
+      - name: test-web
+        image: asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:latest
+
+        ### Resource Request CPU
+        resources:
+          requests:
+            cpu: 250m
+            memory: 1Gi
+        ###
+
+        # ### Resource Request GPU
+        # resources:
+        #   limits:
+        #     nvidia.com/gpu: 2
+        #   requests:
+        #     cpu: "36"
+        #     memory: "36Gi"
+        # ### 
+
+        ports:
+        - containerPort: 80
+```
+
+</details>
 
 ![image](https://user-images.githubusercontent.com/111631457/222332947-b79562ab-fb52-41b2-a16e-586f679dc3fb.png)
 
@@ -333,7 +399,72 @@ Check the quotas in the project
 
 <img width="1168" alt="image" src="https://user-images.githubusercontent.com/111631457/222381885-6c69a4d2-a80e-4658-8ecd-72d2dfca0fa0.png">
 
-Open the "Resrouce Request GPU" and close the "Resrouce Request CPU" in deployment.yaml
+Open the comment "Resrouce Request GPU" and close "Resrouce Request CPU" in deployment.yaml
+
+<details>
+<summary>Manifest "development.yaml"</summary>
+  
+```  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-web-deployment
+  labels:
+    app: test-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test-web
+  template:
+    metadata:
+      labels:
+        app: test-web
+    spec:
+
+      ### Resource Request GPU
+      nodeSelector:
+        cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
+      ###
+
+      # ### Best-effort Spot Pod
+      # terminationGracePeriodSeconds: 25
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: cloud.google.com/gke-spot
+      #           operator: In
+      #           values:
+      #           - "true"
+      # ###
+      
+      containers:
+      - name: test-web
+        image: asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:latest
+
+        # ### Resource Request CPU
+        # resources:
+        #   requests:
+        #     cpu: 250m
+        #     memory: 1Gi
+        # ###
+
+        ### Resource Request GPU
+        resources:
+          limits:
+            nvidia.com/gpu: 2
+          requests:
+            cpu: "36"
+            memory: "36Gi"
+        ### 
+
+        ports:
+        - containerPort: 80
+```
+
+</details>
 
 ![image](https://user-images.githubusercontent.com/111631457/222333215-27157ab9-fc7f-4ac3-8f29-21de8201379a.png)
 
@@ -366,6 +497,76 @@ When you request Spot Pods on a preferred basis, GKE schedules your Pods based o
 2. Existing standard nodes that have available allocatable capacity.
 3. New nodes that can run Spot Pods, if the compute resources are available.
 4. New standard nodes.
+
+Deploy the best-effort basis Spot Pods
+
+Open the comment "Best-effort Spot Pods"
+
+<details>
+<summary>Manifest "development.yaml"</summary>
+  
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-web-deployment
+  labels:
+    app: test-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test-web
+  template:
+    metadata:
+      labels:
+        app: test-web
+    spec:
+    
+      ### Resource Request GPU
+      nodeSelector:
+        cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
+      ###
+
+      ### Best-effort Spot Pod
+      terminationGracePeriodSeconds: 25
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cloud.google.com/gke-spot
+                operator: In
+                values:
+                - "true"
+      ###
+      
+      containers:
+      - name: test-web
+        image: asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:latest
+
+        # ### Resource Request CPU
+        # resources:
+        #   requests:
+        #     cpu: 250m
+        #     memory: 1Gi
+        # ###
+
+        ### Resource Request GPU
+        resources:
+          limits:
+            nvidia.com/gpu: 2
+          requests:
+            cpu: "36"
+            memory: "36Gi"
+        ### 
+
+        ports:
+        - containerPort: 80
+```
+  
+</details>
+
 
 #### Pod AutoScaler
 
