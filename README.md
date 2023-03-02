@@ -6,7 +6,6 @@ This is a Tutorial of Google Kubernetes Engine
   
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
 
 - [Create GKE Cluster and other GCP resources](#create-gke-cluster-and-other-gcp-resources)
   - [Create VPC](#create-vpc)
