@@ -577,8 +577,39 @@ Tolerations: cloud.google.com/gke-accelerator=nvidia-tesla-t4:NoSchedule
 ~~~
 ```
 
-#### Pod AutoScaler
+---
 
+#### Horizontal Pod Autoscaling (HPA)
+
+The Horizontal Pod Autoscaler changes the shape of your Kubernetes workload by automatically increasing or decreasing the number of Pods in response to the workload's CPU or memory consumption, or in response to custom metrics reported from within Kubernetes or external metrics from sources outside of your cluster.
+
+This example creates HorizontalPodAutoscaler object to autoscale the Deployment when CPU utilization surpasses 50%, and ensures that there is always a minimum of 3 replica and a maximum of 10 replicas.
+
+<img width="314" alt="image" src="https://user-images.githubusercontent.com/111631457/222517532-1f45fda8-55d4-4740-98e8-2eab009f6851.png">
+
+```
+$ kubectl apply -f hpa.yaml
+$ kubectl get hpa
+NAME           REFERENCE                        TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+test-web-hpa   Deployment/test-web-deployment   19%/50%   3         10        3          41m
+```
+
+If the load exceeds 50%, Replica Pods are created as follows
+
+<img width="670" alt="image" src="https://user-images.githubusercontent.com/111631457/222523278-0e1239b8-ecd9-430c-897a-e4437543c930.png">
+
+[Ref.]
+For a simple load, log in to the container and execute a lot of "yes" commands.
+
+```
+$ kubectl exec -it test-web-deployment-5bd8b78bfc-675bj /bin/bash
+
+$ yes > dev/null &
+(repeat it)
+```
+
+
+---
 
 #### CI/CD
 
