@@ -1,6 +1,9 @@
 # GKE Autopilot Tutorial
 This is a Tutorial of Google Kubernetes Engine
 
+<details>
+<summary>TOC</summary>
+  
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
@@ -25,11 +28,8 @@ This is a Tutorial of Google Kubernetes Engine
     - [CI/CD](#cicd)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-test
-
-1. [Create GKE Cluster & other GCP resources](https://github.com/khosino/gke-tutarial#create-gke-cluster)
-2. Deploy sample web application on GKE
-3. 
+  
+</details>
 
 ## Create GKE Cluster and other GCP resources
 
