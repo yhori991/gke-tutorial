@@ -1,8 +1,30 @@
 # GKE Autopilot Tutorial
 This is a Tutorial of Google Kubernetes Engine
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Create GKE Cluster and other GCP resources](#create-gke-cluster-and-other-gcp-resources)
+  - [Create VPC](#create-vpc)
+  - [Create GKE Cluster](#create-gke-cluster)
+  - [Create Artifact Registry (Docker Registry)](#create-artifact-registry-docker-registry)
+- [Deploy the sample web application on kubernetes](#deploy-the-sample-web-application-on-kubernetes)
+  - [Build and push the docker image](#build-and-push-the-docker-image)
+    - [Build the Dockerfile](#build-the-dockerfile)
+    - [Push to docker repogitry created in GCP](#push-to-docker-repogitry-created-in-gcp)
+  - [Deploy the docker image on GKE](#deploy-the-docker-image-on-gke)
+    - [Connect to GKE from Cloud Shell](#connect-to-gke-from-cloud-shell)
+    - [Deploy the "Pod"](#deploy-the-pod)
+    - [Deploy the "Deployment" and "Service"](#deploy-the-deployment-and-service)
+    - [Reaource request](#reaource-request)
+      - [CPU and Memory request](#cpu-and-memory-request)
+      - [GPU reauest](#gpu-reauest)
+      - [Spot Pods](#spot-pods)
+    - [Pod AutoScaler](#pod-autoscaler)
+    - [CI/CD](#cicd)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 test
 
 1. [Create GKE Cluster & other GCP resources](https://github.com/khosino/gke-tutarial#create-gke-cluster)
