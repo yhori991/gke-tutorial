@@ -14,8 +14,43 @@ spec:
       labels:
         app: test-web
     spec:
+      ### Resource Request GPU
+      nodeSelector:
+        cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
+      ###
+      ### Use Spot Pod
+        #cloud.google.com/gke-spot: "true"
+      terminationGracePeriodSeconds: 25
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cloud.google.com/gke-spot
+                operator: In
+                values:
+                - "true"
+      ###
+      
       containers:
       - name: test-web
         image: asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:latest
+
+        # ### Resource Request CPU
+        # resources:
+        #   requests:
+        #     cpu: 250m
+        #     memory: 1Gi
+        # ###
+
+        ### Resource Request GPU
+        resources:
+          limits:
+            nvidia.com/gpu: 2
+          requests:
+            cpu: "36"
+            memory: "36Gi"
+        ### 
+
         ports:
         - containerPort: 80
