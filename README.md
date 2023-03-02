@@ -23,7 +23,7 @@ This is a Tutorial of Google Kubernetes Engine
       - [CPU and Memory request](#cpu-and-memory-request)
       - [GPU reauest](#gpu-reauest)
       - [Spot Pods](#spot-pods)
-    - [Pod AutoScaler](#pod-autoscaler)
+    - [Horizontal Pod Autoscaling (HPA)](#horizontal-pod-autoscaling-hpa)
     - [CI/CD](#cicd)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
