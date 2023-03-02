@@ -1,4 +1,4 @@
-# GKE Tutorial
+# GKE Autopilot Tutorial
 This is a Tutorial of Google Kubernetes Engine
 
 1. [Create GKE Cluster & other GCP resources](https://github.com/khosino/gke-tutarial#create-gke-cluster)
@@ -207,6 +207,89 @@ The LoadBalancer is created automatically in Google Cloud.
 
 <img width="1311" alt="image" src="https://user-images.githubusercontent.com/111631457/222210376-d0fb33e9-7031-434a-b2e8-0693dd64b425.png">
 
+#### Reaource config
+
+##### CPU and Memory setting
+
+**Get current spec**
+
+[Resource requests in Autopilot](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-resource-requests)
+
+```
+$ kubectl get pods
+NAME                                  READY   STATUS    RESTARTS   AGE
+test-web-deployment-d7779f6f4-crvvh   1/1     Running   0          11h
+test-web-deployment-d7779f6f4-mwnxs   1/1     Running   0          11h
+test-web-deployment-d7779f6f4-vwwsd   1/1     Running   0          11h
+
+$ kubectl describe pods test-web-deployment-d7779f6f4-crvvh
+~~~
+Requests:
+      cpu:                500m
+      ephemeral-storage:  1Gi
+      memory:             2Gi
+~~~
+# This is the default value in case you don't specify.
+```
+
+**Change the manifest file**
+
+Open the "Resrouce Config CPU" in deployment.yaml
+
+![image](https://user-images.githubusercontent.com/111631457/222332947-b79562ab-fb52-41b2-a16e-586f679dc3fb.png)
+
+```
+$ kubectl apply -f deployment.yaml
+deployment.apps/test-web-deployment configured
+
+$ kubectl get pods
+NAME                                   READY   STATUS        RESTARTS   AGE
+test-web-deployment-6587db96c8-5fsgb   1/1     Running       0          7m8s
+test-web-deployment-6587db96c8-5l9wr   1/1     Terminating   0          5m31s
+test-web-deployment-d7779f6f4-4cqqm    0/1     Pending       0          1s
+test-web-deployment-d7779f6f4-kdj4h    1/1     Running       0          6s
+test-web-deployment-d7779f6f4-nssz8    1/1     Running       0          2m29s
+# Rolling update
+# Always keep 3 pods available
+
+$ kubectl describe pods test-web-deployment-d7779f6f4-kdj4h
+~~~
+Requests:
+  cpu:                250m
+  ephemeral-storage:  1Gi
+  memory:             1Gi
+~~~
+```
+
+##### GPU setting
+
+Check quotas in the project
+
+<img width="1209" alt="image" src="https://user-images.githubusercontent.com/111631457/222381756-b0fcf633-8e7c-4eac-8d24-81c9cccc9986.png">
+
+<img width="1168" alt="image" src="https://user-images.githubusercontent.com/111631457/222381885-6c69a4d2-a80e-4658-8ecd-72d2dfca0fa0.png">
+
+Open the "Resrouce Config GPU" and close the "Resrouce Config CPU" in deployment.yaml
+
+![image](https://user-images.githubusercontent.com/111631457/222333215-27157ab9-fc7f-4ac3-8f29-21de8201379a.png)
+
+```
+$ kubectl apply -f deployment.yaml
+$ kubectl get pods
+$ kubectl describe pods test-web-deployment-6b67f6c455-2jlgr
+~~~
+Requests:
+  cpu:                18
+  ephemeral-storage:  1Gi
+  memory:             18Gi
+  nvidia.com/gpu:     1
+~~~
+Node-Selectors:  cloud.google.com/gke-accelerator=nvidia-tesla-t4
+                 cloud.google.com/gke-accelerator-count=1
+~~~
+```
+
+[Requesting Spot Pods on a best-effort basis](https://cloud.google.com/kubernetes-engine/docs/how-to/autopilot-spot-pods#prefer-spot-pods)
 
 #### Pod AutoScaler
 
