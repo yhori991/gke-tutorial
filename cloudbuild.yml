@@ -1,8 +1,9 @@
  steps:
   - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'LS'
+    id: 'Edit Deployment Manifest'
     entrypoint: '/bin/sh'
     args:
+      - '-c'
       - 'ls -l'
     dir: 'gke-tutorial'
 
