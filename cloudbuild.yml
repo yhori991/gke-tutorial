@@ -1,18 +1,4 @@
  steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'LS'
-    entrypoint: '/bin/sh'
-    args:
-      - '-c'
-      - 'ls -l'
-
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'PWD'
-    entrypoint: '/bin/sh'
-    args:
-      - '-c'
-      - 'pwd'
-
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build Image'
     args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', './docker']
