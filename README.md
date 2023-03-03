@@ -618,8 +618,34 @@ $ yes > dev/null &
 
 Continuous integration and continuous delivery (CI/CD) are essential processes to deliver software quickly and reliably. CI/CD helps to automate the build, test, and deployment process, which can save time and reduce errors.
 
-In your case, for example, you can simply write the source code for the chi chi learning to be used in Ray Cluster and upload it to git, which will automatically "build the container", "push to Docker Registory", "deploy to GKE", etc.
+In your case, for example, you can simply write the source code for the machine learning to be used in Ray Cluster and upload it to git, which will automatically "build the container", "push to Docker Registory", "deploy to GKE", etc.
 In other words, you can do everything in this tutorial automatically.
+
+##### Create Source Repositries
+
+<details>
+<summary>Source Repositries Screen shot</summary>
+
+<img width="1219" alt="image" src="https://user-images.githubusercontent.com/111631457/222630681-7cf7b161-9d07-4eb4-8e8d-512fea31510b.png">
+
+from "Add a repositry", create new or connect you repo (e.g. github).
+
+<img width="1085" alt="image" src="https://user-images.githubusercontent.com/111631457/222630792-d2561c8d-8ae8-422f-92ae-500b3607e9cf.png">
+
+If you select connect existing repositries.
+
+<img width="760" alt="image" src="https://user-images.githubusercontent.com/111631457/222631076-0dffd1b2-95f8-4b06-85cb-37371ed0cf76.png">
+
+It's cloned from github to Source Repositries.
+
+<img width="1030" alt="image" src="https://user-images.githubusercontent.com/111631457/222631425-0d2c2510-7426-4000-acec-684f92b403ea.png">
+
+</deatils>
+
+##### Create Cloud Build Trigger
+
+
+
 
 
 
