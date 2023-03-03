@@ -623,7 +623,12 @@ Continuous integration and continuous delivery (CI/CD) are essential processes t
 In your case, for example, you can simply write the source code for the machine learning to be used in Ray Cluster and upload it to git, which will automatically "build the container", "push to Docker Registory", "deploy to GKE", etc.
 In other words, you can do everything in this tutorial automatically.
 
+<img width="620" alt="image" src="https://user-images.githubusercontent.com/111631457/222636161-e61a610f-2909-4ef9-8ffa-bb627547e0f8.png">
+
 ##### Create Source Repositries
+
+Create a repository with Source Repositories, a Google Cloud code management service. If you usually use Github, you can use that repository as is.
+In this hands-on, we will create a repository in Source Repositories and set up a connection with Github. Whenever there is a change in Github, Cloud Build will be activated via Source Repositories.
 
 <details>
 <summary>Source Repositries Screen shot</summary>
@@ -646,8 +651,61 @@ It's cloned from github to Source Repositries.
 
 ##### Create Cloud Build Trigger
 
+Cloud Build Trigger can detect repository updates and automatically execute predefined commands.
+The execution can be defined in Steps.
 
+In this case, we define the following steps: 
+1. build a new version of the Docker Image from the changed code
+2. push the built image to the Artifact Registry 
+3. modify the k8s manifest file (deployment.yaml) to use the new image version Tag
+4. run kubectl command to reflect the changes in GKE (Deployment, Service, )
 
+cloudbuild.yml
+
+```
+ steps:
+  - name: 'gcr.io/cloud-builders/docker'
+      id: 'Build Image'
+      args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', './docker', '-f', 'docker/Dockerfile']
+      dir: 'gke-tutorial-repo'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push to GCR'
+    args: ['push', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA']
+    dir: 'gke-tutorial-repo'
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'Edit Deployment Manifest'
+    entrypoint: '/bin/sh'
+    args:
+      - '-c'
+      - sed -i -e 's/COMMIT_SHA/${SHORT_SHA}/' manifest/deployment.yaml
+    dir: 'gke-tutorial-repo'
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: 'Apply Deployment Manifest'
+    args: ['apply', '-f', 'manifest/deployment.yaml']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${PROJECT_ID}'
+    dir: 'gke-tutorial-repo'
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: 'Apply Service Manifest'
+    args: ['apply', '-f', 'manifest/service.yaml']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${PROJECT_ID}'
+    dir: 'gke-tutorial-repo'
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    id: 'Apply HPA Manifest'
+    args: ['apply', '-f', 'manifest/hpa.yaml']
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=${PROJECT_ID}'
+    dir: 'gke-tutorial-repo'
+```
 
 
 
