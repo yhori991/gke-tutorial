@@ -1,6 +1,6 @@
  steps:
   - name: 'gcr.io/cloud-builders/gcloud'
-    id: 'Edit Deployment Manifest'
+    id: 'LS'
     entrypoint: '/bin/sh'
     args:
       - '-c'
