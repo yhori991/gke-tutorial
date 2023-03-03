@@ -611,6 +611,8 @@ $ yes > dev/null &
 
 ---
 
+### 3. Automatically deploy
+
 #### CI/CD
 
 Continuous integration and continuous delivery (CI/CD) are essential processes to deliver software quickly and reliably. CI/CD helps to automate the build, test, and deployment process, which can save time and reduce errors.
