@@ -1,8 +1,8 @@
  steps:
   - name: 'gcr.io/cloud-builders/docker'
-      id: 'Build Image'
-      args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', './docker', '-f', 'docker/Dockerfile']
-      dir: 'gke-tutorial-repo'
+    id: 'Build Image'
+    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', './docker', '-f', 'docker/Dockerfile']
+    dir: 'gke-tutorial-repo'
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Push to GCR'
