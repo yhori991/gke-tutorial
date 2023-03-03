@@ -1,7 +1,7 @@
  steps:
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build Image'
-    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', './docker']
+    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', 'docker']
     dir: 'gke-tutorial'
 
   - name: 'gcr.io/cloud-builders/docker'
