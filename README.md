@@ -30,7 +30,7 @@ This is a Tutorial of Google Kubernetes Engine
   
 </details>
 
-## Create GKE Cluster and other GCP resources
+## 1. Create GKE Cluster and other GCP resources
 
 [What's Kubernetes?](https://cloud.google.com/learn/what-is-kubernetes)
 
@@ -42,7 +42,7 @@ GKE (Google Kubernetes Engine)is the most scalable and fully automated Kubernete
 
 ---
 
-### Create VPC
+### 1.1 Create VPC
 
 <details>
 <summary>VPC console Screen shot</summary>
@@ -53,7 +53,7 @@ GKE (Google Kubernetes Engine)is the most scalable and fully automated Kubernete
 
 ---
 
-### Create GKE Cluster
+### 1.2 Create GKE Cluster
 
 <details>
 <summary>GKE console Screen shot</summary>
@@ -68,7 +68,7 @@ GKE (Google Kubernetes Engine)is the most scalable and fully automated Kubernete
 
 ---
 
-### Create Artifact Registry (Docker Registry)
+### 1.3 Create Artifact Registry (Docker Registry)
 
 
 <details>
@@ -80,7 +80,7 @@ GKE (Google Kubernetes Engine)is the most scalable and fully automated Kubernete
 <img width="562" alt="image" src="https://user-images.githubusercontent.com/111631457/222076746-d00ea348-2453-4dc4-8282-336bf51450fc.png">
 </details>
 
-## Deploy the sample web application on kubernetes
+## 2. Deploy the sample web application on kubernetes
 
 In Cloud Shell
 
@@ -94,7 +94,7 @@ $ ls -l
 
 ---
 
-### Build and push the docker image
+### 2.1 Build and push the docker image
 
 Please check the Dockerfile and index.html! (Cloud Shell Editor is recommended)
 
@@ -158,7 +158,7 @@ $ docker push asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-rep
 
 ---
 
-### Deploy the docker image on GKE
+### 2.2 Deploy the docker image on GKE
 
 #### Connect to GKE from Cloud Shell
 
