@@ -48,10 +48,10 @@ spec:
         ### Resource Request GPU
         resources:
           limits:
-            nvidia.com/gpu: 2
+            nvidia.com/gpu: 1
           requests:
-            cpu: "36"
-            memory: "36Gi"
+            cpu: "18"
+            memory: "18Gi"
         ### 
 
         ports:
