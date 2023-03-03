@@ -5,6 +5,13 @@
     args:
       - '-c'
       - 'ls -l'
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'PWD'
+    entrypoint: '/bin/sh'
+    args:
+      - '-c'
+      - 'pwd'
     dir: 'gke-tutorial'
 
   - name: 'gcr.io/cloud-builders/docker'
