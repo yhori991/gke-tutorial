@@ -26,6 +26,8 @@ This is a Tutorial of Google Kubernetes Engine
     - [Horizontal Pod Autoscaling (HPA)](#horizontal-pod-autoscaling-hpa)
   - [3. Automatically deploy](#3-automatically-deploy)
     - [CI/CD](#cicd)
+      - [Create Source Repositries](#create-source-repositries)
+      - [Create Cloud Build Trigger](#create-cloud-build-trigger)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
   
