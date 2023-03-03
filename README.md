@@ -647,7 +647,7 @@ It's cloned from github to Source Repositries.
 
 <img width="1030" alt="image" src="https://user-images.githubusercontent.com/111631457/222631425-0d2c2510-7426-4000-acec-684f92b403ea.png">
 
-</deatils>
+</details>
 
 ##### Create Cloud Build Trigger
 
