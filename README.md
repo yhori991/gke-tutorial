@@ -24,6 +24,7 @@ This is a Tutorial of Google Kubernetes Engine
       - [GPU reauest](#gpu-reauest)
       - [Spot Pods](#spot-pods)
     - [Horizontal Pod Autoscaling (HPA)](#horizontal-pod-autoscaling-hpa)
+  - [3. Automatically deploy](#3-automatically-deploy)
     - [CI/CD](#cicd)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
