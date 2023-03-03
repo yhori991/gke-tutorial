@@ -1,13 +1,13 @@
  steps:
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build Image'
-    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', './docker', '-f', 'docker/Dockerfile']
-    dir: 'gke-tutorial-repo'
+    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', './docker']
+    dir: 'gke-tutorial'
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Push to GCR'
     args: ['push', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA']
-    dir: 'gke-tutorial-repo'
+    dir: 'gke-tutorial'
 
   - name: 'gcr.io/cloud-builders/gcloud'
     id: 'Edit Deployment Manifest'
@@ -15,7 +15,7 @@
     args:
       - '-c'
       - sed -i -e 's/COMMIT_SHA/${SHORT_SHA}/' manifest/deployment.yaml
-    dir: 'gke-tutorial-repo'
+    dir: 'gke-tutorial'
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'Apply Deployment Manifest'
@@ -23,7 +23,7 @@
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
       - 'CLOUDSDK_CONTAINER_CLUSTER=${PROJECT_ID}'
-    dir: 'gke-tutorial-repo'
+    dir: 'gke-tutorial'
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'Apply Service Manifest'
@@ -31,7 +31,7 @@
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
       - 'CLOUDSDK_CONTAINER_CLUSTER=${PROJECT_ID}'
-    dir: 'gke-tutorial-repo'
+    dir: 'gke-tutorial'
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'Apply HPA Manifest'
@@ -39,4 +39,4 @@
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
       - 'CLOUDSDK_CONTAINER_CLUSTER=${PROJECT_ID}'
-    dir: 'gke-tutorial-repo'
+    dir: 'gke-tutorial'
