@@ -7,15 +7,15 @@ This is a Tutorial of Google Kubernetes Engine
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Create GKE Cluster and other GCP resources](#create-gke-cluster-and-other-gcp-resources)
-  - [Create VPC](#create-vpc)
-  - [Create GKE Cluster](#create-gke-cluster)
-  - [Create Artifact Registry (Docker Registry)](#create-artifact-registry-docker-registry)
-- [Deploy the sample web application on kubernetes](#deploy-the-sample-web-application-on-kubernetes)
-  - [Build and push the docker image](#build-and-push-the-docker-image)
+- [1. Create GKE Cluster and other GCP resources](#1-create-gke-cluster-and-other-gcp-resources)
+  - [1.1 Create VPC](#11-create-vpc)
+  - [1.2 Create GKE Cluster](#12-create-gke-cluster)
+  - [1.3 Create Artifact Registry (Docker Registry)](#13-create-artifact-registry-docker-registry)
+- [2. Deploy the sample web application on kubernetes](#2-deploy-the-sample-web-application-on-kubernetes)
+  - [2.1 Build and push the docker image](#21-build-and-push-the-docker-image)
     - [Build the Dockerfile](#build-the-dockerfile)
     - [Push to docker repogitry created in GCP](#push-to-docker-repogitry-created-in-gcp)
-  - [Deploy the docker image on GKE](#deploy-the-docker-image-on-gke)
+  - [2.2 Deploy the docker image on GKE](#22-deploy-the-docker-image-on-gke)
     - [Connect to GKE from Cloud Shell](#connect-to-gke-from-cloud-shell)
     - [Deploy the "Pod"](#deploy-the-pod)
     - [Deploy the "Deployment" and "Service"](#deploy-the-deployment-and-service)
