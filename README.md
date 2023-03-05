@@ -611,12 +611,9 @@ $ yes > dev/null &
 (repeat it)
 ```
 
-
 ---
 
-### 3. Automatically deploy
-
-#### CI/CD
+### 3. Automatically deploy (CI/CD)
 
 Continuous integration and continuous delivery (CI/CD) are essential processes to deliver software quickly and reliably. CI/CD helps to automate the build, test, and deployment process, which can save time and reduce errors.
 
@@ -625,7 +622,7 @@ In other words, you can do everything in this tutorial automatically.
 
 <img width="620" alt="image" src="https://user-images.githubusercontent.com/111631457/222636161-e61a610f-2909-4ef9-8ffa-bb627547e0f8.png">
 
-##### Create Source Repositries
+#### Create Source Repositries
 
 Create a repository with Source Repositories, a Google Cloud code management service. If you usually use Github, you can use that repository as is.
 In this hands-on, we will create a repository in Source Repositories and set up a connection with Github. Whenever there is a change in Github, Cloud Build will be activated via Source Repositories.
@@ -646,7 +643,7 @@ It's cloned from github to Source Repositries.
 
 
 
-##### Create Cloud Build Trigger
+#### Create Cloud Build Trigger
 
 Cloud Build Trigger can detect repository updates and automatically execute predefined commands.
 The execution can be defined in Steps.
@@ -705,8 +702,49 @@ Click `CREATE TRIGGER`
 
 <img width="450" alt="image" src="https://user-images.githubusercontent.com/111631457/222956001-a5d23330-6fcb-42cc-a099-c6383b9bbd7b.png">
 
+If the file under `docker` changed, the cloud build is triggered
+
 <img width="450" alt="image" src="https://user-images.githubusercontent.com/111631457/222956013-43b620e1-35b8-4d9c-88e1-89e24f44a0ac.png">
 
 <img width="450" alt="image" src="https://user-images.githubusercontent.com/111631457/222956030-cc62786b-6b17-4bf0-a0ed-0a1225af74cb.png">
+
+Add the permission to execute kubectl from Cloud Build.
+IAM -> {PROJECT_ID}@cloudservices.gserviceaccount.com -> Edit
+ADD the `Kubernetes Engine Developer`
+
+<img width="1429" alt="image" src="https://user-images.githubusercontent.com/111631457/222964674-c038b938-e2df-4aa0-9d3d-b47f1bfe04d9.png">
+
+
+#### Change & push to the repositry
+
+Change the `index.html` and push to github or Source Repositries.
+
+```
+$ git add .
+$ git commit -m "Update container"
+$ git push
+```
+
+Then Cloud Build is triggered.
+
+<img width="900" alt="image" src="https://user-images.githubusercontent.com/111631457/222957105-6a44bf04-48c9-45e2-9c63-2fe8d7705b31.png">
+
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/111631457/222957114-c16afd25-f338-4875-bc21-59bed853f5ec.png">
+
+The new version is pushed in the artifact registry.
+
+<img width="989" alt="image" src="https://user-images.githubusercontent.com/111631457/222957168-13f6b8a4-7cdb-467e-a22a-3326dd5d8b20.png">
+
+After the proccess of Cloud Build finished and Pod updated, new version is released on GKE.
+
+Access to Service IP address.
+
+```
+$ kubectl get svc
+```
+
+
+
+
 
 
