@@ -24,10 +24,10 @@ This is a Tutorial of Google Kubernetes Engine
       - [GPU reauest](#gpu-reauest)
       - [Spot Pods](#spot-pods)
     - [Horizontal Pod Autoscaling (HPA)](#horizontal-pod-autoscaling-hpa)
-  - [3. Automatically deploy](#3-automatically-deploy)
-    - [CI/CD](#cicd)
-      - [Create Source Repositries](#create-source-repositries)
-      - [Create Cloud Build Trigger](#create-cloud-build-trigger)
+  - [3. Automatically deploy (CI/CD)](#3-automatically-deploy-cicd)
+    - [Create Source Repositries](#create-source-repositries)
+    - [Create Cloud Build Trigger](#create-cloud-build-trigger)
+    - [Change & push to the repositry](#change--push-to-the-repositry)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
   
