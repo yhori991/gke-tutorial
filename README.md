@@ -630,24 +630,21 @@ In other words, you can do everything in this tutorial automatically.
 Create a repository with Source Repositories, a Google Cloud code management service. If you usually use Github, you can use that repository as is.
 In this hands-on, we will create a repository in Source Repositories and set up a connection with Github. Whenever there is a change in Github, Cloud Build will be activated via Source Repositories.
 
-<details>
-<summary>Source Repositries Screen shot</summary>
-
-<img width="1219" alt="image" src="https://user-images.githubusercontent.com/111631457/222630681-7cf7b161-9d07-4eb4-8e8d-512fea31510b.png">
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/111631457/222630681-7cf7b161-9d07-4eb4-8e8d-512fea31510b.png">
 
 from "Add a repositry", create new or connect you repo (e.g. github).
 
-<img width="1085" alt="image" src="https://user-images.githubusercontent.com/111631457/222630792-d2561c8d-8ae8-422f-92ae-500b3607e9cf.png">
+<img width="720" alt="image" src="https://user-images.githubusercontent.com/111631457/222630792-d2561c8d-8ae8-422f-92ae-500b3607e9cf.png">
 
 If you select connect existing repositries.
 
-<img width="760" alt="image" src="https://user-images.githubusercontent.com/111631457/222631076-0dffd1b2-95f8-4b06-85cb-37371ed0cf76.png">
+<img width="512" alt="image" src="https://user-images.githubusercontent.com/111631457/222631076-0dffd1b2-95f8-4b06-85cb-37371ed0cf76.png">
 
 It's cloned from github to Source Repositries.
 
-<img width="1030" alt="image" src="https://user-images.githubusercontent.com/111631457/222631425-0d2c2510-7426-4000-acec-684f92b403ea.png">
+<img width="720" alt="image" src="https://user-images.githubusercontent.com/111631457/222631425-0d2c2510-7426-4000-acec-684f92b403ea.png">
 
-</details>
+
 
 ##### Create Cloud Build Trigger
 
@@ -661,18 +658,15 @@ In this case, we define the following steps:
 4. run kubectl command to reflect the changes in GKE (Deployment, Service, )
 
 cloudbuild.yml
-
 ```
  steps:
   - name: 'gcr.io/cloud-builders/docker'
-      id: 'Build Image'
-      args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', './docker', '-f', 'docker/Dockerfile']
-      dir: 'gke-tutorial-repo'
+    id: 'Build Image'
+    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA', './docker']
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Push to GCR'
     args: ['push', 'asia-northeast1-docker.pkg.dev/${PROJECT_ID}/gke-tutorial-repo/test-web-image:$SHORT_SHA']
-    dir: 'gke-tutorial-repo'
 
   - name: 'gcr.io/cloud-builders/gcloud'
     id: 'Edit Deployment Manifest'
@@ -680,32 +674,39 @@ cloudbuild.yml
     args:
       - '-c'
       - sed -i -e 's/COMMIT_SHA/${SHORT_SHA}/' manifest/deployment.yaml
-    dir: 'gke-tutorial-repo'
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'Apply Deployment Manifest'
     args: ['apply', '-f', 'manifest/deployment.yaml']
     env:
-      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=${PROJECT_ID}'
-    dir: 'gke-tutorial-repo'
+      - 'CLOUDSDK_COMPUTE_REGION=asia-northeast1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'Apply Service Manifest'
     args: ['apply', '-f', 'manifest/service.yaml']
     env:
-      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=${PROJECT_ID}'
-    dir: 'gke-tutorial-repo'
+      - 'CLOUDSDK_COMPUTE_REGION=asia-northeast1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
 
   - name: 'gcr.io/cloud-builders/kubectl'
     id: 'Apply HPA Manifest'
     args: ['apply', '-f', 'manifest/hpa.yaml']
     env:
-      - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-a'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=${PROJECT_ID}'
-    dir: 'gke-tutorial-repo'
+      - 'CLOUDSDK_COMPUTE_REGION=asia-northeast1'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1'
 ```
 
+Click `CREATE TRIGGER`
+
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/111631457/222955854-133b340d-eee0-4a5c-9978-0560850da97d.png">
+
+<img width="640" alt="image" src="https://user-images.githubusercontent.com/111631457/222955985-1d13ba43-330c-43f9-b753-c7ba1397896b.png">
+
+<img width="450" alt="image" src="https://user-images.githubusercontent.com/111631457/222956001-a5d23330-6fcb-42cc-a099-c6383b9bbd7b.png">
+
+<img width="450" alt="image" src="https://user-images.githubusercontent.com/111631457/222956013-43b620e1-35b8-4d9c-88e1-89e24f44a0ac.png">
+
+<img width="450" alt="image" src="https://user-images.githubusercontent.com/111631457/222956030-cc62786b-6b17-4bf0-a0ed-0a1225af74cb.png">
 
 
