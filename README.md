@@ -228,7 +228,16 @@ kubectl describe pods test-web
 
 #### Deploy the "Deployment" and "Service"
 
+<img width="911" alt="image" src="https://user-images.githubusercontent.com/111631457/222965641-b084955f-fe41-4659-b7ca-2dee22f588f5.png">
+
 Deploy the Deployment with 3 replicas.
+
+<details>
+  <summary>Deployment file</summary>
+  ```
+  
+  ```
+</details>
 
 ```
 $ kubectl apply -f deployment.yaml
@@ -509,21 +518,7 @@ Open the comment "Best-effort Spot Pods" in development.yaml
 <summary>Manifest "development.yaml"</summary>
   
 ```
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: test-web-deployment
-  labels:
-    app: test-web
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: test-web
-  template:
-    metadata:
-      labels:
-        app: test-web
+~~
     spec:
     
       ### Resource Request GPU
@@ -548,24 +543,7 @@ spec:
       - name: test-web
         image: asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:latest
 
-        # ### Resource Request CPU
-        # resources:
-        #   requests:
-        #     cpu: 250m
-        #     memory: 1Gi
-        # ###
-
-        ### Resource Request GPU
-        resources:
-          limits:
-            nvidia.com/gpu: 2
-          requests:
-            cpu: "36"
-            memory: "36Gi"
-        ### 
-
-        ports:
-        - containerPort: 80
+~~
 ```
   
 </details>
@@ -613,7 +591,7 @@ $ yes > dev/null &
 
 ---
 
-### 3. Automatically deploy (CI/CD)
+### 3. Automatically deploy (CI/CD) [Advanced]
 
 Continuous integration and continuous delivery (CI/CD) are essential processes to deliver software quickly and reliably. CI/CD helps to automate the build, test, and deployment process, which can save time and reduce errors.
 
@@ -696,6 +674,12 @@ cloudbuild.yml
 
 Click `CREATE TRIGGER`
 
+Open deployment.yaml. Edit the container image tag for recognizing the latest version with Commit ID.
+`COMMIT_SHA` is replaced to short commit ID in Cloud Build Step 3.
+
+<img width="719" alt="image" src="https://user-images.githubusercontent.com/111631457/222965865-2425a759-ce1c-45b0-a4fc-a0ea025a54e1.png">
+
+
 <img width="800" alt="image" src="https://user-images.githubusercontent.com/111631457/222955854-133b340d-eee0-4a5c-9978-0560850da97d.png">
 
 <img width="640" alt="image" src="https://user-images.githubusercontent.com/111631457/222955985-1d13ba43-330c-43f9-b753-c7ba1397896b.png">
@@ -742,9 +726,6 @@ Access to Service IP address.
 ```
 $ kubectl get svc
 ```
-
-
-
 
 
 
