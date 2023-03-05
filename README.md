@@ -27,6 +27,12 @@ This is a Tutorial of Google Kubernetes Engine
   
 </details>
 
+## TL;DR
+This hands-on course aims to familiarize participants with the basic operations of k8s and GKE, and to build a simple web service.
+In the process, participants will also learn how to use GPUs in Autopilot, autoscale, and build Spot Pods.
+In addition, we will build a CI/CD pipeline to automate container image updates using GCP's managed services.
+Once you understand this hands-on, you will have a complete foundation on which to run Ray Cluster.
+
 ## 1. Create GKE Cluster and other GCP resources
 
 [What's Kubernetes?](https://cloud.google.com/learn/what-is-kubernetes)
@@ -225,13 +231,6 @@ kubectl describe pods test-web
 <img width="911" alt="image" src="https://user-images.githubusercontent.com/111631457/222965641-b084955f-fe41-4659-b7ca-2dee22f588f5.png">
 
 Deploy the Deployment with 3 replicas.
-
-<details>
-  <summary>Deployment file</summary>
-  ```
-  
-  ```
-</details>
 
 ```
 $ kubectl apply -f deployment.yaml
