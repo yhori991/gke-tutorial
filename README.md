@@ -727,6 +727,7 @@ Access to Service IP address.
 $ kubectl get svc
 ```
 
-Next...
-[Ray Cluster on GKE Autopilot]{https://github.com/khosino/raycluster-gkeap-demo/tree/main/distrl}
+### Next...
+
+[Ray Cluster on GKE Autopilot](https://github.com/khosino/raycluster-gkeap-demo/tree/main/distrl)
 
