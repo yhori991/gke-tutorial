@@ -5,7 +5,7 @@ metadata:
   labels:
     app: test-web
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: test-web
@@ -50,8 +50,8 @@ spec:
           limits:
             nvidia.com/gpu: 1
           requests:
-            cpu: "18"
-            memory: "18Gi"
+            cpu: "2"
+            memory: "2Gi"
         ### 
 
         ports:
