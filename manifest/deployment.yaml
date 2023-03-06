@@ -20,23 +20,23 @@ spec:
         cloud.google.com/gke-accelerator: "nvidia-tesla-t4"
       ###
 
-      # ### Best-effort Spot Pod
-      terminationGracePeriodSeconds: 25
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: cloud.google.com/gke-spot
-                operator: In
-                values:
-                - "true"
-      ###
-      
+      # # ### Best-effort Spot Pod
+      # terminationGracePeriodSeconds: 25
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: cloud.google.com/gke-spot
+      #           operator: In
+      #           values:
+      #           - "true"
+      # ###
+
       containers:
       - name: test-web
-        #image: asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:latest
-        image: asia-northeast1-docker.pkg.dev/gke-tutorial-hclsj/gke-tutorial-repo/test-web-image:COMMIT_SHA
+        #image: asia-northeast1-docker.pkg.dev/project-yhori/gke-tutorial-repo/test-web-image:latest
+        image: asia-northeast1-docker.pkg.dev/project-yhori/gke-tutorial-repo/test-web-image:COMMIT_SHA
 
         # ### Resource Request CPU
         # resources:
@@ -52,7 +52,7 @@ spec:
           requests:
             cpu: "2"
             memory: "2Gi"
-        ### 
+        ###
 
         ports:
         - containerPort: 80
